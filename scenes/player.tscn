@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://cwjuxbxakulwo"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_j0dbg"]
+[ext_resource type="Resource" uid="uid://cu2gtxlcmbb34" path="res://weapons/blaster-repeater.tres" id="2_emyhq"]
+[ext_resource type="Resource" uid="uid://c56y8pqoyk15f" path="res://weapons/blaster.tres" id="3_aphpy"]
+[ext_resource type="Environment" uid="uid://cvcd5q6775hei" path="res://environments/env_main3.tres" id="4_30ssi"]
+[ext_resource type="Material" uid="uid://b1raq08oi0l4g" path="res://shaders/vhs.tres" id="4_s2wfm"]
+[ext_resource type="Theme" uid="uid://boqoiq7xxf5pp" path="res://hud_themes/debugtheme.tres" id="5_xqmhv"]
+[ext_resource type="Script" path="res://scripts/debugui.gd" id="6_jek0w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y1rp5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2k2ik"]
+height = 1.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v4356"]
+radius = 0.1
+
+[node name="player" type="CharacterBody3D"]
+floor_max_angle = 1.0472
+script = ExtResource("1_j0dbg")
+sprinting_speed = 15.0
+base_fov = 80.0
+weapons = Array[Resource("res://scripts/weapon.gd")]([ExtResource("2_emyhq"), ExtResource("3_aphpy")])
+
+[node name="standing_collision_shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_y1rp5")
+
+[node name="crouching_collision_shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6072, 0)
+shape = SubResource("CapsuleShape3D_2k2ik")
+disabled = true
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+cull_mask = 1048573
+environment = ExtResource("4_30ssi")
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191828, 0)
+visible = false
+light_color = Color(1, 1, 0.917647, 1)
+light_energy = 2.0
+light_indirect_energy = 2.067
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 40.0
+spot_attenuation = 1.10957
+spot_angle_attenuation = 1.18921
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="head/Camera3D"]
+material = ExtResource("4_s2wfm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="head/Camera3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 1
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="CameraItem" type="Camera3D" parent="head/Camera3D/SubViewportContainer/SubViewport"]
+cull_mask = 1047554
+fov = 40.0
+
+[node name="Container" type="Node3D" parent="head/Camera3D/SubViewportContainer/SubViewport/CameraItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0144675, 0, -1.40378)
+
+[node name="RayCastWeapon" type="RayCast3D" parent="head/Camera3D"]
+exclude_parent = false
+target_position = Vector3(0, 0, -10)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_v4356")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugPanel" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("5_xqmhv")
+script = ExtResource("6_jek0w")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DebugPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DebugPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2

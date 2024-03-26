@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bxbot67eu41ah"]
+
+[ext_resource type="Shader" path="res://shaders/ps1.gdshader" id="1_tyoyb"]
+[ext_resource type="Texture2D" uid="uid://cqleh78nppxeo" path="res://assets/textures/dev/grids/Orange/texture_05.png" id="2_tx5fv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_tyoyb")
+shader_parameter/jitter = 0.8
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = false
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo = ExtResource("2_tx5fv")

@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cvcd5q6775hei"]
+
+[ext_resource type="Texture2D" uid="uid://d4jvqkp2op570" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_kqlna"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ppyqp"]
+panorama = ExtResource("1_kqlna")
+
+[sub_resource type="Sky" id="Sky_cnvag"]
+sky_material = SubResource("PanoramaSkyMaterial_ppyqp")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_cnvag")
+ssao_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 5
+sdfgi_max_distance = 409.6
+volumetric_fog_enabled = true
