@@ -49,7 +49,6 @@ var container_offset = Vector3(1.2, -1.1, -2.75)
 
 @export var crosshair:TextureRect
 #endregion
-
 #region Settings
 
 #const resolutions = [Vector2i(192, 108),
@@ -111,6 +110,7 @@ func _physics_process(delta):
 		Global.debug.add_property("Instantiated Primitives", Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME), 10)
 		Global.debug.add_property("Objects in frame", Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME), 11)
 		Global.debug.add_property("Debug Draw (CTRL+Z)", debug_draw_names[current_debug_draw_index], 12)
+		Global.debug.add_property("Occlusion (CTRL+F)", get_tree().root.use_occlusion_culling, 13)
 	#endregion
 	
 	if Input.is_action_just_pressed("toggleflashlight"):
@@ -153,6 +153,8 @@ func _physics_process(delta):
 		camera_3d.fov = camera_3d.fov + zoom_sensitivity
 	if Input.is_action_just_pressed("zoomreset"):
 		camera_3d.fov = 80.0
+	if Input.is_action_just_pressed("toggleoccluder"):
+		get_tree().root.use_occlusion_culling = !get_tree().root.use_occlusion_culling
 	#region Handle Movement State
 	if Input.is_action_pressed("crouch"):
 		if is_on_floor():
