@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvm4xnaovg7ba"]
+[gd_scene load_steps=15 format=3 uid="uid://dvm4xnaovg7ba"]
 
 [ext_resource type="Texture2D" uid="uid://uswms8h7fvw" path="res://assets/textures/dev/grids/Dark/texture_07.png" id="1_cnof1"]
 [ext_resource type="Texture2D" uid="uid://d4jvqkp2op570" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_sfcui"]
 [ext_resource type="Texture2D" uid="uid://cqleh78nppxeo" path="res://assets/textures/dev/grids/Orange/texture_05.png" id="2_yt6fr"]
 [ext_resource type="PackedScene" uid="uid://cwjuxbxakulwo" path="res://scenes/player.tscn" id="5_c5i36"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="5_qlcws"]
+[ext_resource type="Script" path="res://scripts/change_level.gd" id="6_anqu6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gmn26"]
 panorama = ExtResource("2_sfcui")
@@ -30,6 +31,10 @@ uv1_triplanar = true
 albedo_color = Color(0.760784, 0.760784, 0.760784, 1)
 albedo_texture = ExtResource("2_yt6fr")
 uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_n62dd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m1hju"]
 
 [node name="world" type="Node3D"]
 
@@ -197,3 +202,15 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
 pivot_offset = Vector2(64, 64)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34269, 0, -16.4769)
+mesh = SubResource("BoxMesh_n62dd")
+script = ExtResource("6_anqu6")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_m1hju")
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="MeshInstance3D" method="_on_area_3d_body_entered"]
