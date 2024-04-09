@@ -57,24 +57,28 @@ var container_offset = Vector3(1.2, -1.1, -2.75)
 		#Vector2i(1632, 918), Vector2i(1920, 1080),
 		#Vector2i(2553, 1436), Vector2i(2880, 1620),
 		#Vector2i(3840, 2160), Vector2i(4800, 2700)]
-#const scaling_render = [0.1, 0.25, 0.5, 0.67, 0.75, 0.85, 1.00, 1.33, 1.50, 2.00, 2.50]
+const scaling_render = [0.1, 0.25, 0.5, 0.67, 0.75, 0.85, 1.00, 1.33, 1.50, 2.00, 2.50]
 const scaling_mode_names = ["Bilinear", "FSR 1.0", "FSR 2.2"]
 const scaling_mode = [Viewport.SCALING_3D_MODE_BILINEAR, Viewport.SCALING_3D_MODE_FSR, Viewport.SCALING_3D_MODE_FSR2]
 const debug_draw_names = ["Normal", "Wireframe"]
 
 var current_debug_draw_index = 0
-#var current_resolution_index = 0
+var current_resolution_index = 0
 var current_res_mode_index = 0
 #endregion
 
 #Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+#Pause Variables
+
+var paused = false
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	weapon = weapons[weapon_index] # Weapon must never be nil
 	initiate_change_weapon(weapon_index)
-	#get_viewport().scaling_3d_scale = scaling_render[current_resolution_index]
+	get_viewport().scaling_3d_scale = scaling_render[current_resolution_index]
 	get_viewport().scaling_3d_mode = scaling_mode[current_res_mode_index]
 	subviewport_container.visible = false
 	camera_3d.environment.volumetric_fog_enabled = false
@@ -85,8 +89,8 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	if event.is_action_pressed("quit"):
+		Global.pause_menu.pauseMenu()
 
 func _process(delta):
 	#region Debug
@@ -100,7 +104,7 @@ func _physics_process(delta):
 		Global.debug.add_property("Weapon Cooldown", snappedf(blaster_cooldown.time_left, .1), 1)
 		Global.debug.add_property("Movement Speed", velocity, 2)
 		Global.debug.add_property("Volumetric Fog (CTRL+R)", camera_3d.environment.volumetric_fog_enabled, 3)
-		#Global.debug.add_property("Resolution (CTRL+C)", resolutions[current_resolution_index], 4)
+		Global.debug.add_property("Resolution (CTRL+C)", scaling_render[current_resolution_index], 14)
 		Global.debug.add_property("Camera Shader (CTRL+E)", subviewport_container.visible, 4)
 		Global.debug.add_property("FPS Lock + Vsync (CTRL+V)", DisplayServer.window_get_vsync_mode(), 5)
 		Global.debug.add_property("Scaling mode (CTRL+X)", scaling_mode_names[current_res_mode_index], 6)
@@ -128,10 +132,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("toggleenvironment"):
 		camera_3d.environment.volumetric_fog_enabled = !camera_3d.environment.volumetric_fog_enabled
 	
-	#if Input.is_action_just_pressed("changeresolution"):
-		#current_resolution_index += 1
-		#current_resolution_index %= len(scaling_render)
-		#get_viewport().scaling_3d_scale = scaling_render[current_resolution_index]
+	if Input.is_action_just_pressed("changeresolution"):
+		current_resolution_index += 1
+		current_resolution_index %= len(scaling_render)
+		get_viewport().scaling_3d_scale = scaling_render[current_resolution_index]
 	
 	if Input.is_action_just_pressed("togglerendermode"):
 		current_res_mode_index += 1
@@ -218,7 +222,7 @@ func _physics_process(delta):
 	
 	#region Camera FOV
 	var velocity_clamped = clamp(velocity.length(), 0.5, sprinting_speed * 2)
-	var target_fov = base_fov + fov_change * velocity_clamped
+	var _target_fov = base_fov + fov_change * velocity_clamped
 	#camera_3d.fov = lerp(camera_3d.fov, target_fov, delta * 8.0)
 	move_and_slide()
 

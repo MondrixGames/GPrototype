@@ -24,3 +24,5 @@ func add_property(title : String, value, order):
 	elif visible:
 		target.text = title + ": " + str(value)
 		property_container.move_child(target, order)
+
+

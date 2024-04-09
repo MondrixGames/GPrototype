@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwjuxbxakulwo"]
+[gd_scene load_steps=12 format=3 uid="uid://cwjuxbxakulwo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_j0dbg"]
 [ext_resource type="Resource" uid="uid://cu2gtxlcmbb34" path="res://weapons/blaster-repeater.tres" id="2_emyhq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://b1raq08oi0l4g" path="res://shaders/vhs.tres" id="4_s2wfm"]
 [ext_resource type="Theme" uid="uid://boqoiq7xxf5pp" path="res://hud_themes/debugtheme.tres" id="5_xqmhv"]
 [ext_resource type="Script" path="res://scripts/debugui.gd" id="6_jek0w"]
+[ext_resource type="PackedScene" uid="uid://0f867cbhqlse" path="res://scenes/pause_menu.tscn" id="8_vasos"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y1rp5"]
 
@@ -114,3 +115,6 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/DebugPanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("player_camera") instance=ExtResource("8_vasos")]
+player_camera = NodePath("../head/Camera3D")

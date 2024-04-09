@@ -8,14 +8,16 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 
 
-func _on_area_3d_body_entered(_body):
-	if Input.is_action_just_pressed("shoot"):
-		var level = load("res://scenes/%s.tscn" % level_name)
-		get_tree().change_scene_to_packed(level)
-	pass # Replace with function body.
+func _on_area_3d_body_entered(body):
+	if body.name == "player":
+		call_deferred("_change_scene")
+
+func _change_scene():
+	var level = load("res://scenes/%s.tscn" % level_name)
+	get_tree().change_scene_to_packed(level)
