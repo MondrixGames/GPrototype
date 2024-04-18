@@ -22,6 +22,7 @@ floor_max_angle = 1.0472
 script = ExtResource("1_j0dbg")
 sprinting_speed = 15.0
 base_fov = 80.0
+zoom_sensitivity = 3.0
 weapons = Array[Resource("res://scripts/weapon.gd")]([ExtResource("2_emyhq"), ExtResource("3_aphpy")])
 
 [node name="standing_collision_shape" type="CollisionShape3D" parent="."]

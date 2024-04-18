@@ -13,25 +13,17 @@ script = ExtResource("1_lg1on")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -33.0
-offset_right = 35.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_right = -114.0
+offset_bottom = 374.0
+grow_horizontal = 0
 scale = Vector2(2, 2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Resume"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -39,11 +31,82 @@ text = "Quit"
 
 [node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+max_value = 3.0
+step = 0.05
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[node name="HSlider2" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 0.2
+step = 0.01
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton2" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider3" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 20.0
+
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton3" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Filmic"
+popup/item_1/id = 1
+popup/item_2/text = "Reinhard"
+popup/item_2/id = 2
+popup/item_3/text = "ACES"
+popup/item_3/id = 3
+
+[node name="OptionButton2" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 7
+fit_to_longest_item = false
+popup/item_0/text = "2560x1440"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+popup/item_3/text = "854x480"
+popup/item_3/id = 3
+popup/item_4/text = "640x360"
+popup/item_4/id = 4
+popup/item_5/text = "426x240"
+popup/item_5/id = 5
+popup/item_6/text = "3440x1440 (MODO CARLITOS)"
+popup/item_6/id = 6
+
+[node name="CheckButton4" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="color_changed" from="MarginContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton2" to="." method="_on_check_button_2_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider3" to="." method="_on_h_slider_3_value_changed"]
+[connection signal="color_changed" from="MarginContainer/VBoxContainer/ColorPickerButton2" to="." method="_on_color_picker_button_2_color_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton3" to="." method="_on_check_button_3_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider4" to="." method="_on_h_slider_4_value_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButton2" to="." method="_on_option_button_2_item_selected"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton4" to="." method="_on_check_button_4_toggled"]

@@ -85,12 +85,13 @@ func _ready():
 	Engine.max_fps = 60
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and !paused:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	if event.is_action_pressed("quit"):
 		Global.pause_menu.pauseMenu()
+		paused = !paused
 
 func _process(delta):
 	#region Debug
@@ -115,6 +116,7 @@ func _physics_process(delta):
 		Global.debug.add_property("Objects in frame", Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME), 11)
 		Global.debug.add_property("Debug Draw (CTRL+Z)", debug_draw_names[current_debug_draw_index], 12)
 		Global.debug.add_property("Occlusion (CTRL+F)", get_tree().root.use_occlusion_culling, 13)
+		Global.debug.add_property("Window Size", DisplayServer.window_get_size(), 14)
 	#endregion
 	
 	if Input.is_action_just_pressed("toggleflashlight"):
