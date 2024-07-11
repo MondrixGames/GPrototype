@@ -107,3 +107,13 @@ func _on_check_button_4_toggled(toggled_on):
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	pass # Replace with function body.
+
+
+func _on_check_button_5_toggled(toggled_on):
+	if toggled_on:
+		player_camera.environment.background_mode=Environment.BG_SKY
+		player_camera.environment.background_energy_multiplier=1.0
+		player_camera.environment.tonemap_mode=Environment.TONE_MAPPER_ACES
+		player_camera.environment.tonemap_exposure=1.0
+		player_camera.environment.tonemap_white=16.0
+	pass # Replace with function body.

@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://5okj7olfr7t8"]
+
+[ext_resource type="PackedScene" uid="uid://dy2llap4wjodv" path="res://assets/models/test_ground3/test_ground3.blend" id="1_ikmkw"]
+[ext_resource type="Texture2D" uid="uid://uswms8h7fvw" path="res://assets/textures/dev/grids/Dark/texture_07.png" id="2_o6mhv"]
+[ext_resource type="Texture2D" uid="uid://cqleh78nppxeo" path="res://assets/textures/dev/grids/Orange/texture_05.png" id="3_4e4wv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imhdw"]
+albedo_texture = ExtResource("2_o6mhv")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0372"]
+albedo_texture = ExtResource("3_4e4wv")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp2ix"]
+albedo_texture = ExtResource("3_4e4wv")
+uv1_triplanar = true
+
+[node name="test_ground3" instance=ExtResource("1_ikmkw")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_imhdw")
+
+[node name="cub1" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="cub2" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="cub1_5" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="cub_5" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="plank10" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="plank20" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="plank30" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="plank40" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="plank50" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="Esc2" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="Esc" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="Esc3" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="Esc4" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i0372")
+
+[node name="Cube" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_021" parent="." index="35"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_042" parent="." index="56"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_063" parent="." index="77"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_084" parent="." index="98"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_105" parent="." index="119"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_126" parent="." index="140"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_147" parent="." index="161"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_168" parent="." index="182"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
+
+[node name="Cube_189" parent="." index="203"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lp2ix")
