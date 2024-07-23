@@ -16,11 +16,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -230.0
-offset_right = -114.0
-offset_bottom = 374.0
+offset_left = -161.0
+offset_bottom = 348.0
 grow_horizontal = 0
-scale = Vector2(2, 2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -29,6 +27,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Quit"
 
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
 [node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 3.0
@@ -36,6 +38,8 @@ step = 0.05
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "Volumetric Fog Color"
+edit_alpha = false
 
 [node name="HSlider2" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -44,9 +48,11 @@ step = 0.01
 
 [node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "SDFGI"
 
 [node name="CheckButton2" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "SSIL"
 
 [node name="HSlider3" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -54,9 +60,11 @@ max_value = 20.0
 
 [node name="ColorPickerButton2" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "Ambient Light Color"
 
 [node name="CheckButton3" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "Tonemap Exposure"
 
 [node name="HSlider4" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -96,12 +104,18 @@ popup/item_6/id = 6
 
 [node name="CheckButton4" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "Screen Mode"
 
 [node name="CheckButton5" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "RESET"
 
+[node name="FreeLookToggle" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Free Look Camera"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="color_changed" from="MarginContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
@@ -115,3 +129,4 @@ text = "RESET"
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButton2" to="." method="_on_option_button_2_item_selected"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton4" to="." method="_on_check_button_4_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton5" to="." method="_on_check_button_5_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/FreeLookToggle" to="." method="_on_free_look_toggle_toggled"]

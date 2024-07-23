@@ -26,11 +26,6 @@ func _process(_delta):
 	pass
 
 
-func _on_resume_pressed():
-	pauseMenu()
-	pass # Replace with function body.
-
-
 func _on_quit_pressed():
 	get_tree().quit()
 	pass # Replace with function body.
@@ -117,3 +112,9 @@ func _on_check_button_5_toggled(toggled_on):
 		player_camera.environment.tonemap_exposure=1.0
 		player_camera.environment.tonemap_white=16.0
 	pass # Replace with function body.
+
+func _on_free_look_toggle_toggled(toggled_on):
+	Global.emit_signal("toggle_free_fly", toggled_on)
+
+func _on_continue_pressed():
+	pauseMenu()

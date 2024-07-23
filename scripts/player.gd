@@ -75,7 +75,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var paused = false
 
 func _ready():
+	visible = camera_3d.current
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Global.toggle_free_fly.connect(toggle_free_fly)
 	weapon = weapons[weapon_index] # Weapon must never be nil
 	initiate_change_weapon(weapon_index)
 	get_viewport().scaling_3d_scale = scaling_render[current_resolution_index]
@@ -84,7 +86,21 @@ func _ready():
 	camera_3d.environment.volumetric_fog_enabled = false
 	Engine.max_fps = 60
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+
+func toggle_free_fly(value):
+	visible = !value
+	paused = !value
+	camera_3d.current = !value
+	if value:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
 func _input(event):
+	if !visible:
+		return
+	
 	if event is InputEventMouseMotion and !paused:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
@@ -94,12 +110,17 @@ func _input(event):
 		paused = !paused
 
 func _process(delta):
+	if !visible:
+		return
+	
 	#region Debug
 	if Global.debug.visible:
 		Global.debug.add_property("FPS", snappedf(1.0/delta, 0.1), -1)
 	gildo_proof()
 	#endregion
 func _physics_process(delta):
+	if !visible:
+		return
 	#region Debug
 	if Global.debug.visible:
 		Global.debug.add_property("Weapon Cooldown", snappedf(blaster_cooldown.time_left, .1), 1)

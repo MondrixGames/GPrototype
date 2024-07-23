@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyvicwa68f72x"]
+
+[ext_resource type="Script" path="res://scripts/free_look_camera.gd" id="1_1wevk"]
+
+[node name="FreeLookCamera" type="Camera3D"]
+script = ExtResource("1_1wevk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
