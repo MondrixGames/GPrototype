@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://lg5h2q54ao1a"
+path="res://.godot/imported/room1.exr-7a0ff80c5a28d4c8dd9787c7eab545b0.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://scenes/rooms/room1.exr"
+dest_files=["res://.godot/imported/room1.exr-7a0ff80c5a28d4c8dd9787c7eab545b0.ctexarray"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=1
