@@ -63,7 +63,7 @@ const scaling_mode = [Viewport.SCALING_3D_MODE_BILINEAR, Viewport.SCALING_3D_MOD
 const debug_draw_names = ["Normal", "Wireframe"]
 
 var current_debug_draw_index = 0
-var current_resolution_index = 0
+var current_resolution_index = 6
 var current_res_mode_index = 0
 #endregion
 

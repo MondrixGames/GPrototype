@@ -190,6 +190,7 @@ scale = Vector2(0.35, 0.35)
 pivot_offset = Vector2(64, 64)
 
 [node name="MeshInstance3D" parent="." instance=ExtResource("6_efqqo")]
+level_name = "rooms/debug_scene1"
 
 [node name="enemy1" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_hl1nd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.8317, 4.76837e-07, -5.90507)
